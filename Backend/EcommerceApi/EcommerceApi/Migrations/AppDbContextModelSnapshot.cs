@@ -73,158 +73,6 @@ namespace EcommerceApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Kathmandu",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "shubham@gmail.com",
-                            IsAdmin = true,
-                            IsBuyer = false,
-                            IsSeller = false,
-                            Name = "Shubham Ghimire",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000001",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Pokhara",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "aayush@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = false,
-                            IsSeller = true,
-                            Name = "Aayush Sharma",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000002",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Lalitpur",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "rohan@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = true,
-                            IsSeller = false,
-                            Name = "Rohan Karki",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000003",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Bhaktapur",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "suman@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = true,
-                            IsSeller = true,
-                            Name = "Suman Thapa",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000004",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "Chitwan",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "prakash@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = true,
-                            IsSeller = false,
-                            Name = "Prakash Adhikari",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000005",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Address = "Butwal",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "bikash@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = false,
-                            IsSeller = true,
-                            Name = "Bikash Gurung",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000006",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Address = "Dharan",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "nabin@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = true,
-                            IsSeller = false,
-                            Name = "Nabin Shrestha",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000007",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Address = "Biratnagar",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "kiran@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = true,
-                            IsSeller = true,
-                            Name = "Kiran Rai",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000008",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Address = "Janakpur",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "santosh@gmail.com",
-                            IsAdmin = false,
-                            IsBuyer = true,
-                            IsSeller = false,
-                            Name = "Santosh Bhandari",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000009",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Address = "Kathmandu",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "dipesh@gmail.com",
-                            IsAdmin = true,
-                            IsBuyer = true,
-                            IsSeller = true,
-                            Name = "Dipesh KC",
-                            PasswordHash = "hashed_password",
-                            Phone = "9800000010",
-                            PhoneCode = "+977",
-                            Status = "Approved"
-                        });
                 });
 
             modelBuilder.Entity("EcommerceApi.Models.Brand", b =>
@@ -436,7 +284,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1585515320310-259814833e62?w=400&q=80",
-                            Description = "High-performance portable electric grinder suitable for home use. Compact design with powerful motor.",
+                            Description = "High-performance portable electric grinder suitable for home use.",
                             DiscountPercent = 12,
                             DiscountedPrice = 777m,
                             FastDelivery = false,
@@ -447,9 +295,8 @@ namespace EcommerceApi.Migrations
                             Price = 888m,
                             Quantity = 50,
                             Rating = 1m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -460,7 +307,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80",
-                            Description = "Foldable motorised treadmill for home workouts. Ultra-silent motor with adjustable speed settings.",
+                            Description = "Foldable motorised treadmill for home workouts. Ultra-silent motor.",
                             DiscountPercent = 11,
                             DiscountedPrice = 888m,
                             FastDelivery = false,
@@ -471,9 +318,8 @@ namespace EcommerceApi.Migrations
                             Price = 999m,
                             Quantity = 20,
                             Rating = 4m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -484,7 +330,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&q=80",
-                            Description = "43-inch Full HD Android Smart TV with frameless design. Built-in Chromecast and Google Assistant.",
+                            Description = "43-inch Full HD Android Smart TV with frameless design.",
                             DiscountPercent = 13,
                             DiscountedPrice = 700m,
                             FastDelivery = false,
@@ -495,9 +341,8 @@ namespace EcommerceApi.Migrations
                             Price = 800m,
                             Quantity = 30,
                             Rating = 4.5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -519,9 +364,8 @@ namespace EcommerceApi.Migrations
                             Price = 930m,
                             Quantity = 100,
                             Rating = 5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -532,7 +376,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,black",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80",
-                            Description = "Apple MacBook Pro with M4 Pro chip, 16GB RAM, 512GB SSD. Incredible performance for professionals.",
+                            Description = "Apple MacBook Pro with M4 Pro chip, 16GB RAM, 512GB SSD.",
                             DiscountPercent = 10,
                             DiscountedPrice = 450m,
                             FastDelivery = false,
@@ -543,9 +387,8 @@ namespace EcommerceApi.Migrations
                             Price = 500m,
                             Quantity = 15,
                             Rating = 4.5m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -556,7 +399,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,orange",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&q=80",
-                            Description = "Aerospace-grade titanium Apple Watch Ultra with action button and precision dual-frequency GPS.",
+                            Description = "Aerospace-grade titanium Apple Watch Ultra with dual-frequency GPS.",
                             DiscountPercent = 10,
                             DiscountedPrice = 89m,
                             FastDelivery = true,
@@ -567,9 +410,8 @@ namespace EcommerceApi.Migrations
                             Price = 99m,
                             Quantity = 40,
                             Rating = 3m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -580,7 +422,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,white",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1611186871525-4de78d02cd32?w=400&q=80",
-                            Description = "Supercharged by M4. The thinnest, lightest Mac ever made with all-day battery life.",
+                            Description = "Supercharged by M4. The thinnest, lightest Mac ever made.",
                             DiscountPercent = 14,
                             DiscountedPrice = 600m,
                             FastDelivery = false,
@@ -591,9 +433,8 @@ namespace EcommerceApi.Migrations
                             Price = 699m,
                             Quantity = 25,
                             Rating = 3.5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -604,7 +445,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,blue",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80",
-                            Description = "Stunning 24-inch 4.5K Retina display iMac powered by M4. Available in multiple colors.",
+                            Description = "Stunning 24-inch 4.5K Retina display iMac powered by M4.",
                             DiscountPercent = 40,
                             DiscountedPrice = 333m,
                             FastDelivery = false,
@@ -615,9 +456,8 @@ namespace EcommerceApi.Migrations
                             Price = 555m,
                             Quantity = 10,
                             Rating = 2.5m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -628,7 +468,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&q=80",
-                            Description = "iPhone 16 Pro with A18 Pro chip, ProMotion display, 48MP camera system.",
+                            Description = "iPhone 16 Pro with A18 Pro chip, ProMotion display, 48MP camera.",
                             DiscountPercent = 33,
                             DiscountedPrice = 600m,
                             FastDelivery = false,
@@ -639,9 +479,8 @@ namespace EcommerceApi.Migrations
                             Price = 899m,
                             Quantity = 60,
                             Rating = 5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -652,7 +491,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=400&q=80",
-                            Description = "Dual vibration USB gamepad compatible with PC and Android. Ergonomic design for long gaming sessions.",
+                            Description = "Dual vibration USB gamepad compatible with PC and Android.",
                             DiscountPercent = 52,
                             DiscountedPrice = 26m,
                             FastDelivery = false,
@@ -663,9 +502,8 @@ namespace EcommerceApi.Migrations
                             Price = 54m,
                             Quantity = 200,
                             Rating = 4.5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -687,9 +525,8 @@ namespace EcommerceApi.Migrations
                             Price = 1299m,
                             Quantity = 40,
                             Rating = 4.7m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -700,7 +537,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&q=80",
-                            Description = "Industry-leading noise cancellation, 30hr battery, multipoint connection, crystal clear calls.",
+                            Description = "Industry-leading noise cancellation, 30hr battery, multipoint connection.",
                             DiscountPercent = 30,
                             DiscountedPrice = 279m,
                             FastDelivery = false,
@@ -711,9 +548,8 @@ namespace EcommerceApi.Migrations
                             Price = 399m,
                             Quantity = 80,
                             Rating = 4.8m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -735,9 +571,8 @@ namespace EcommerceApi.Migrations
                             Price = 2199m,
                             Quantity = 12,
                             Rating = 4.6m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -748,7 +583,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,black",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80",
-                            Description = "Ultra Retina XDR display, M4 chip, Apple Pencil Pro compatible, 10hr battery.",
+                            Description = "Ultra Retina XDR display, M4 chip, Apple Pencil Pro compatible.",
                             DiscountPercent = 10,
                             DiscountedPrice = 899m,
                             FastDelivery = true,
@@ -759,9 +594,8 @@ namespace EcommerceApi.Migrations
                             Price = 999m,
                             Quantity = 25,
                             Rating = 4.9m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -783,9 +617,8 @@ namespace EcommerceApi.Migrations
                             Price = 1299m,
                             Quantity = 18,
                             Rating = 4.5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -796,7 +629,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,blue",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
-                            Description = "AMOLED display, advanced running dynamics, training readiness score, up to 15-day battery.",
+                            Description = "AMOLED display, advanced running dynamics, up to 15-day battery.",
                             DiscountPercent = 16,
                             DiscountedPrice = 379m,
                             FastDelivery = false,
@@ -807,9 +640,8 @@ namespace EcommerceApi.Migrations
                             Price = 449m,
                             Quantity = 35,
                             Rating = 4.6m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -820,7 +652,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,blue",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-                            Description = "Laser detects invisible dust, HEPA filtration, 60min runtime, automatic suction adjustment.",
+                            Description = "Laser detects invisible dust, HEPA filtration, 60min runtime.",
                             DiscountPercent = 13,
                             DiscountedPrice = 649m,
                             FastDelivery = false,
@@ -831,9 +663,8 @@ namespace EcommerceApi.Migrations
                             Price = 749m,
                             Quantity = 22,
                             Rating = 4.7m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -844,7 +675,7 @@ namespace EcommerceApi.Migrations
                             Colors = "white,black",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400&q=80",
-                            Description = "Haptic feedback, adaptive triggers, built-in microphone, USB-C charging, 12hr battery.",
+                            Description = "Haptic feedback, adaptive triggers, built-in microphone, USB-C charging.",
                             DiscountPercent = 22,
                             DiscountedPrice = 69m,
                             FastDelivery = true,
@@ -855,9 +686,8 @@ namespace EcommerceApi.Migrations
                             Price = 89m,
                             Quantity = 150,
                             Rating = 4.8m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -868,7 +698,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&q=80",
-                            Description = "Google Tensor G3 chip, 50MP triple camera, 7 years of OS updates, 30W fast charging.",
+                            Description = "Google Tensor G3 chip, 50MP triple camera, 7 years of OS updates.",
                             DiscountPercent = 20,
                             DiscountedPrice = 799m,
                             FastDelivery = false,
@@ -879,9 +709,8 @@ namespace EcommerceApi.Migrations
                             Price = 999m,
                             Quantity = 30,
                             Rating = 4.5m,
-                            ReviewCount = 1,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -892,7 +721,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80",
-                            Description = "8K DPI sensor, quiet clicks, MagSpeed electromagnetic scroll, ergonomic design, USB-C.",
+                            Description = "8K DPI sensor, quiet clicks, MagSpeed electromagnetic scroll, USB-C.",
                             DiscountPercent = 20,
                             DiscountedPrice = 79m,
                             FastDelivery = false,
@@ -903,9 +732,8 @@ namespace EcommerceApi.Migrations
                             Price = 99m,
                             Quantity = 120,
                             Rating = 4.9m,
-                            ReviewCount = 2,
-                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            ReviewCount = 0,
+                            UpdatedAt = new DateTime(2025, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -916,7 +744,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&q=80",
-                            Description = "Sony OLED 4K TV with Cognitive Processor XR, Acoustic Surface Audio, and Google TV.",
+                            Description = "Sony OLED 4K TV with Cognitive Processor XR and Google TV.",
                             DiscountPercent = 17,
                             DiscountedPrice = 1499m,
                             FastDelivery = false,
@@ -928,8 +756,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 15,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -940,7 +767,7 @@ namespace EcommerceApi.Migrations
                             Colors = "white,gray",
                             CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=400&q=80",
-                            Description = "Active Noise Cancellation, Adaptive Transparency, Personalized Spatial Audio with H2 chip.",
+                            Description = "Active Noise Cancellation, Adaptive Transparency, H2 chip.",
                             DiscountPercent = 20,
                             DiscountedPrice = 199m,
                             FastDelivery = true,
@@ -952,8 +779,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 90,
                             Rating = 4.8m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -964,7 +790,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,black",
                             CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80",
-                            Description = "14.6 inch Dynamic AMOLED 2X display, Snapdragon 8 Gen 2, 12GB RAM, S Pen included.",
+                            Description = "14.6 inch Dynamic AMOLED 2X, Snapdragon 8 Gen 2, 12GB RAM, S Pen.",
                             DiscountPercent = 17,
                             DiscountedPrice = 999m,
                             FastDelivery = false,
@@ -976,8 +802,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 20,
                             Rating = 4.6m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -988,7 +813,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80",
-                            Description = "Tenkeyless design, hot-swappable switches, RGB LIGHTSYNC, tournament grade.",
+                            Description = "Tenkeyless, hot-swappable switches, RGB LIGHTSYNC, tournament grade.",
                             DiscountPercent = 20,
                             DiscountedPrice = 119m,
                             FastDelivery = false,
@@ -1000,8 +825,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 60,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1012,7 +836,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,blue",
                             CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
-                            Description = "Built-in GPS, heart rate monitoring, 7-day battery, Google Maps and Wallet support.",
+                            Description = "Built-in GPS, heart rate monitoring, 7-day battery, Google Maps support.",
                             DiscountPercent = 19,
                             DiscountedPrice = 129m,
                             FastDelivery = false,
@@ -1024,8 +848,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 75,
                             Rating = 4.3m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1036,7 +859,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,blue",
                             CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&q=80",
-                            Description = "Intel Core Ultra 7, 16GB RAM, 1TB SSD, 2.8K OLED touchscreen, 360 degree hinge.",
+                            Description = "Intel Core Ultra 7, 16GB RAM, 1TB SSD, 2.8K OLED touchscreen.",
                             DiscountPercent = 13,
                             DiscountedPrice = 1299m,
                             FastDelivery = false,
@@ -1048,8 +871,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 18,
                             Rating = 4.5m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1060,7 +882,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,white",
                             CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80",
-                            Description = "3840x2160 IPS display, 96W USB-C charging, HDR400, factory calibrated.",
+                            Description = "3840x2160 IPS, 96W USB-C charging, HDR400, factory calibrated.",
                             DiscountPercent = 21,
                             DiscountedPrice = 549m,
                             FastDelivery = false,
@@ -1072,8 +894,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 30,
                             Rating = 4.6m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1084,7 +905,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&q=80",
-                            Description = "Rotating bezel, advanced health tracking, BioActive sensor, 40hr battery life.",
+                            Description = "Rotating bezel, BioActive sensor, advanced health tracking, 40hr battery.",
                             DiscountPercent = 18,
                             DiscountedPrice = 329m,
                             FastDelivery = false,
@@ -1096,8 +917,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 45,
                             Rating = 4.4m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1108,7 +928,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,green",
                             CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&q=80",
-                            Description = "Snapdragon 8 Gen 3, Hasselblad tuned triple camera, 100W SuperVOOC charging, 5400mAh.",
+                            Description = "Snapdragon 8 Gen 3, Hasselblad camera, 100W SuperVOOC, 5400mAh.",
                             DiscountPercent = 19,
                             DiscountedPrice = 649m,
                             FastDelivery = true,
@@ -1120,8 +940,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 35,
                             Rating = 4.5m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1132,7 +951,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
-                            Description = "World-class noise cancellation, high-fidelity audio, 24hr battery, comfortable design.",
+                            Description = "World-class noise cancellation, high-fidelity audio, 24hr battery.",
                             DiscountPercent = 24,
                             DiscountedPrice = 249m,
                             FastDelivery = false,
@@ -1144,8 +963,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 55,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1156,7 +974,7 @@ namespace EcommerceApi.Migrations
                             Colors = "white,black",
                             CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-                            Description = "4000Pa suction, LiDAR navigation, auto-empty base, mop function, 3hr runtime.",
+                            Description = "4000Pa suction, LiDAR navigation, auto-empty base, mop function.",
                             DiscountPercent = 20,
                             DiscountedPrice = 399m,
                             FastDelivery = false,
@@ -1168,19 +986,18 @@ namespace EcommerceApi.Migrations
                             Quantity = 25,
                             Rating = 4.4m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 32,
                             BrandId = 10,
                             Category = "Laptop & PC",
-                            ColorImages = "{\"default\":\"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400\\u0026q=80\",\"gray\":\"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400\\u0026q=80\",\"blue\":\"https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=400\\u0026q=80\"}",
+                            ColorImages = "{\"default\":\"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400\\u0026q=80\",\"gray\":\"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400\\u0026q=80\",\"blue\":\"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400\\u0026q=80\"}",
                             Colors = "gray,blue",
                             CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80",
-                            Description = "13 inch PixelSense Flow touchscreen, Intel Evo i7, 16GB RAM, all-day battery.",
+                            Description = "13 inch PixelSense Flow touchscreen, Intel Evo i7, 16GB RAM.",
                             DiscountPercent = 13,
                             DiscountedPrice = 1399m,
                             FastDelivery = false,
@@ -1192,8 +1009,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 14,
                             Rating = 4.3m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1204,7 +1020,7 @@ namespace EcommerceApi.Migrations
                             Colors = "white,gray",
                             CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1581993192008-63e896f4f744?w=400&q=80",
-                            Description = "Unique Glyph Interface lighting, Snapdragon 8+ Gen 1, 50MP dual camera, 4700mAh.",
+                            Description = "Glyph Interface, Snapdragon 8+ Gen 1, 50MP dual camera, 4700mAh.",
                             DiscountPercent = 17,
                             DiscountedPrice = 579m,
                             FastDelivery = false,
@@ -1216,8 +1032,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 30,
                             Rating = 4.2m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1228,7 +1043,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&q=80",
-                            Description = "Intel i9 13th Gen, RTX 4070, 16GB DDR5, 1TB NVMe, 240Hz QHD display.",
+                            Description = "Intel i9 13th Gen, RTX 4070, 16GB DDR5, 1TB NVMe, 240Hz QHD.",
                             DiscountPercent = 16,
                             DiscountedPrice = 2099m,
                             FastDelivery = false,
@@ -1240,8 +1055,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 10,
                             Rating = 4.8m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1252,7 +1066,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80",
-                            Description = "24.2MP APS-C sensor, 4K video, Dual Pixel CMOS AF II, Wi-Fi, lightweight body.",
+                            Description = "24.2MP APS-C sensor, 4K video, Dual Pixel CMOS AF II, Wi-Fi.",
                             DiscountPercent = 14,
                             DiscountedPrice = 599m,
                             FastDelivery = false,
@@ -1264,8 +1078,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 20,
                             Rating = 4.6m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1276,7 +1089,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80",
-                            Description = "Performance Monitor 5, smooth chain drive, adjustable footrests, folds for storage.",
+                            Description = "Performance Monitor 5, smooth chain drive, adjustable footrests.",
                             DiscountPercent = 15,
                             DiscountedPrice = 849m,
                             FastDelivery = false,
@@ -1288,8 +1101,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 12,
                             Rating = 4.9m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1300,7 +1112,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1527515637462-cff94aca2e0b?w=400&q=80",
-                            Description = "Auto-schedule, Energy Star certified, works with Alexa and Google Assistant, OLED display.",
+                            Description = "Auto-schedule, Energy Star, works with Alexa and Google Assistant.",
                             DiscountPercent = 18,
                             DiscountedPrice = 229m,
                             FastDelivery = false,
@@ -1312,8 +1124,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 40,
                             Rating = 4.5m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1324,7 +1135,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80",
-                            Description = "30K DPI optical sensor, 90hr battery, Focus Pro sensor, ultra-lightweight 64g design.",
+                            Description = "30K DPI, 90hr battery, Focus Pro sensor, ultra-lightweight 64g.",
                             DiscountPercent = 20,
                             DiscountedPrice = 119m,
                             FastDelivery = false,
@@ -1336,8 +1147,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 80,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1348,7 +1158,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,blue",
                             CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&q=80",
-                            Description = "A16 Bionic chip, 48MP main camera, Dynamic Island, USB-C, all-day battery life.",
+                            Description = "A16 Bionic chip, 48MP main camera, Dynamic Island, USB-C.",
                             DiscountPercent = 13,
                             DiscountedPrice = 699m,
                             FastDelivery = true,
@@ -1360,8 +1170,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 50,
                             Rating = 4.6m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1372,7 +1181,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,black",
                             CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=400&q=80",
-                            Description = "900W motor, 32oz cup, stainless steel blades, dishwasher safe, perfect for smoothies.",
+                            Description = "900W motor, 32oz cup, stainless steel blades, dishwasher safe.",
                             DiscountPercent = 22,
                             DiscountedPrice = 69m,
                             FastDelivery = false,
@@ -1384,8 +1193,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 100,
                             Rating = 4.4m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1396,7 +1204,7 @@ namespace EcommerceApi.Migrations
                             Colors = "white,black",
                             CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400&q=80",
-                            Description = "7 inch OLED screen, enhanced audio, 64GB storage, LAN port, wide adjustable stand.",
+                            Description = "7 inch OLED screen, enhanced audio, 64GB storage, LAN port.",
                             DiscountPercent = 9,
                             DiscountedPrice = 319m,
                             FastDelivery = true,
@@ -1408,8 +1216,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 35,
                             Rating = 4.8m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1420,7 +1227,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&q=80",
-                            Description = "Intel Core i7 13th Gen, 16GB RAM, 512GB SSD, 14 inch 2.8K OLED, MIL-SPEC durability.",
+                            Description = "Intel Core i7 13th Gen, 16GB RAM, 512GB SSD, 14 inch 2.8K OLED.",
                             DiscountPercent = 14,
                             DiscountedPrice = 1549m,
                             FastDelivery = false,
@@ -1432,8 +1239,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 12,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1444,7 +1250,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,orange",
                             CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
-                            Description = "1.62 inch AMOLED, 16-day battery, 150 workout modes, SpO2 and heart rate monitoring.",
+                            Description = "1.62 inch AMOLED, 16-day battery, 150 workout modes, SpO2 monitoring.",
                             DiscountPercent = 29,
                             DiscountedPrice = 35m,
                             FastDelivery = true,
@@ -1456,8 +1262,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 200,
                             Rating = 4.2m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1468,7 +1273,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80",
-                            Description = "33MP BSI-CMOS sensor, 4K 60fps video, 759 phase-detect AF points, dual card slots.",
+                            Description = "33MP BSI-CMOS sensor, 4K 60fps video, 759 phase-detect AF points.",
                             DiscountPercent = 12,
                             DiscountedPrice = 2199m,
                             FastDelivery = false,
@@ -1480,8 +1285,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 8,
                             Rating = 4.9m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1492,7 +1296,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80",
-                            Description = "Adjusts from 5 to 52.5 lbs, replaces 15 sets of weights, dials select the weight.",
+                            Description = "Adjusts 5 to 52.5 lbs, replaces 15 sets of weights.",
                             DiscountPercent = 19,
                             DiscountedPrice = 349m,
                             FastDelivery = false,
@@ -1504,8 +1308,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 22,
                             Rating = 4.8m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1516,7 +1319,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,gray",
                             CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1601944177325-f8867652837f?w=400&q=80",
-                            Description = "QLED color technology, Dolby Vision IQ, 120Hz refresh rate, Google TV built-in.",
+                            Description = "QLED color technology, Dolby Vision IQ, 120Hz, Google TV built-in.",
                             DiscountPercent = 19,
                             DiscountedPrice = 649m,
                             FastDelivery = false,
@@ -1528,8 +1331,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 20,
                             Rating = 4.4m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1540,7 +1342,7 @@ namespace EcommerceApi.Migrations
                             Colors = "gray,black",
                             CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=400&q=80",
-                            Description = "Pressure cooker, slow cooker, rice cooker, steamer, sauté, yogurt maker, warmer. 6 quart.",
+                            Description = "Pressure cooker, slow cooker, rice cooker, steamer, sauté. 6 quart.",
                             DiscountPercent = 20,
                             DiscountedPrice = 79m,
                             FastDelivery = false,
@@ -1552,8 +1354,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 80,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1564,7 +1365,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,white",
                             CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&q=80",
-                            Description = "THX 7.1 Spatial Audio, TriForce Titanium 50mm drivers, HyperClear mic, 70hr battery.",
+                            Description = "THX 7.1 Spatial Audio, TriForce 50mm drivers, HyperClear mic, 70hr battery.",
                             DiscountPercent = 20,
                             DiscountedPrice = 159m,
                             FastDelivery = false,
@@ -1576,8 +1377,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 45,
                             Rating = 4.6m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1588,7 +1388,7 @@ namespace EcommerceApi.Migrations
                             Colors = "black,orange",
                             CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&q=80",
-                            Description = "S9 SiP chip, Double Tap gesture, Always-On Retina display, carbon neutral, 18hr battery.",
+                            Description = "S9 SiP chip, Double Tap gesture, Always-On Retina display, 18hr battery.",
                             DiscountPercent = 12,
                             DiscountedPrice = 379m,
                             FastDelivery = true,
@@ -1600,8 +1400,7 @@ namespace EcommerceApi.Migrations
                             Quantity = 55,
                             Rating = 4.7m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1612,20 +1411,19 @@ namespace EcommerceApi.Migrations
                             Colors = "white,black",
                             CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DefaultImage = "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80",
-                            Description = "Dual QHD 5120x1440, 240Hz, 1ms, QLED, G-Sync + FreeSync, immersive 1000R curve.",
+                            Description = "Dual QHD 5120x1440, 240Hz, 1ms, QLED, G-Sync + FreeSync, 1000R curve.",
                             DiscountPercent = 20,
                             DiscountedPrice = 1199m,
                             FastDelivery = false,
                             FreeDelivery = false,
                             HasPromo = true,
                             IsActive = true,
-                            Name = "Samsung 49 inch Odyssey G9 Curved Gaming Monitor",
+                            Name = "Samsung 49 inch Odyssey G9 Curved Monitor",
                             Price = 1499m,
                             Quantity = 10,
                             Rating = 4.8m,
                             ReviewCount = 0,
-                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UpdatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1661,260 +1459,6 @@ namespace EcommerceApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Comment = "Not worth the price. Motor noise is too loud.",
-                            CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 1,
-                            Rating = 1m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Comment = "Stopped working after 2 weeks.",
-                            CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 1,
-                            Rating = 1m,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Comment = "Great treadmill for home use! Very quiet motor.",
-                            CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 2,
-                            Rating = 4m,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Comment = "Picture quality is stunning. Google Assistant works great.",
-                            CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 3,
-                            Rating = 4.5m,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Comment = "Best headphones I have ever used. ANC is phenomenal!",
-                            CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 4,
-                            Rating = 5m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Comment = "Blazing fast performance. Best laptop on the market.",
-                            CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Rating = 5m,
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Comment = "Excellent build quality. Battery life could be better.",
-                            CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Rating = 4m,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Comment = "Good watch but overpriced. The titanium feels great though.",
-                            CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 6,
-                            Rating = 3m,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Comment = "Very thin and light. Perfect for daily work.",
-                            CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 7,
-                            Rating = 3.5m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Comment = "Beautiful design but not worth the cost.",
-                            CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 8,
-                            Rating = 2m,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Comment = "Display is amazing. Setup was easy.",
-                            CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 8,
-                            Rating = 3m,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Comment = "Best iPhone ever! Camera is insane.",
-                            CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 9,
-                            Rating = 5m,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Comment = "Great gamepad for the price. Vibration feedback is solid.",
-                            CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 10,
-                            Rating = 4.5m,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Comment = "S Pen makes this phone unique. Camera is top tier.",
-                            CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 11,
-                            Rating = 5m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Comment = "Battery life is excellent. Performance is smooth.",
-                            CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 11,
-                            Rating = 4.4m,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Comment = "Sound quality is unmatched. ANC is best in class.",
-                            CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 12,
-                            Rating = 5m,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Comment = "Very comfortable for long listening sessions.",
-                            CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 12,
-                            Rating = 4.5m,
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Comment = "OLED display is gorgeous. RTX 4060 handles everything.",
-                            CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 13,
-                            Rating = 4.6m,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Comment = "M4 chip is overkill in a good way. Display is gorgeous.",
-                            CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 14,
-                            Rating = 5m,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Comment = "Best tablet available. Apple Pencil integration is seamless.",
-                            CreatedAt = new DateTime(2025, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 14,
-                            Rating = 4.8m,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Comment = "Quantum HDR makes movies pop. Alexa integration is useful.",
-                            CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 15,
-                            Rating = 4.5m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Comment = "Running metrics are incredibly detailed. Battery lasts 15 days!",
-                            CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 16,
-                            Rating = 4.6m,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Comment = "Laser detection is amazing. Picks up dust I couldn't see.",
-                            CreatedAt = new DateTime(2025, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 17,
-                            Rating = 4.7m,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Comment = "Haptic feedback completely changes gaming. DualSense is phenomenal.",
-                            CreatedAt = new DateTime(2025, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 18,
-                            Rating = 5m,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Comment = "Adaptive triggers add immersion. Battery life is decent.",
-                            CreatedAt = new DateTime(2025, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 18,
-                            Rating = 4.5m,
-                            UserId = 8
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Comment = "Google AI features are impressive. Camera is outstanding.",
-                            CreatedAt = new DateTime(2025, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 19,
-                            Rating = 4.5m,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Comment = "Best mouse I have ever used. MagSpeed scrolling is addictive.",
-                            CreatedAt = new DateTime(2025, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 20,
-                            Rating = 5m,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Comment = "Ergonomics are perfect. Quiet clicks are a game changer in office.",
-                            CreatedAt = new DateTime(2025, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 20,
-                            Rating = 4.8m,
-                            UserId = 9
-                        });
                 });
 
             modelBuilder.Entity("EcommerceApi.Models.Product", b =>
