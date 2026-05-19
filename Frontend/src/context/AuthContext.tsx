@@ -28,6 +28,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user,  setUser]  = useState<UserInfo | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  
 
   // Restore session from localStorage on app load
   useEffect(() => {
@@ -71,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }}>
       {children}
     </AuthContext.Provider>
-  );
+  );   
 }
 
 export function useAuth() {

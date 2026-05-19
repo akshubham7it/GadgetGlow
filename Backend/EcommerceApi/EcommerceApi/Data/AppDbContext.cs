@@ -12,12 +12,17 @@ namespace EcommerceApi.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // ── Primary Keys ──────────────────────────────────────────
+            // ── Keys & Identity ─────────────────────────────────────────
+
             modelBuilder.Entity<Product>().HasKey(p => p.Id);
             modelBuilder.Entity<Product>().Property(p => p.Id).ValueGeneratedOnAdd();
 
@@ -30,27 +35,86 @@ namespace EcommerceApi.Data
             modelBuilder.Entity<Review>().HasKey(r => r.Id);
             modelBuilder.Entity<Review>().Property(r => r.Id).ValueGeneratedOnAdd();
 
-            // ── Relationships ─────────────────────────────────────────
+            modelBuilder.Entity<CartItem>().HasKey(c => c.Id);
+            modelBuilder.Entity<CartItem>().Property(c => c.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Order>().HasKey(o => o.Id);
+            modelBuilder.Entity<Order>().Property(o => o.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<OrderItem>().HasKey(i => i.Id);
+            modelBuilder.Entity<OrderItem>().Property(i => i.Id).ValueGeneratedOnAdd();
+
+
+            // ── CartItem ─────────────────────────────────────────
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Product)
+                .WithMany()
+                .HasForeignKey(c => c.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // One user can only have one row per product
+            modelBuilder.Entity<CartItem>()
+                .HasIndex(c => new { c.UserId, c.ProductId })
+                .IsUnique();
+
+
+            // ── Order ─────────────────────────────────────────
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.Items)
+                .WithOne(i => i.Order)
+                .HasForeignKey(i => i.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            // ── OrderItem ─────────────────────────────────────────
+
+            // ProductId is nullable → keeps order history if product is deleted
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(i => i.Product)
+                .WithMany()
+                .HasForeignKey(i => i.ProductId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+
+            // ── Product Relationships ─────────────────────────────────────────
+
             modelBuilder.Entity<Product>()
-                .HasOne<Brand>(p => p.Brand)
+                .HasOne(p => p.Brand)
                 .WithMany(b => b.Products)
                 .HasForeignKey(p => p.BrandId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Product>()
-                .HasOne<AppUser>(p => p.User)
+                .HasOne(p => p.User)
                 .WithMany(u => u.Products)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+
+            // ── Review Relationships ─────────────────────────────────────────
+
             modelBuilder.Entity<Review>()
-                .HasOne<Product>(r => r.Product)
+                .HasOne(r => r.Product)
                 .WithMany(p => p.Reviews)
                 .HasForeignKey(r => r.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Review>()
-                .HasOne<AppUser>(r => r.User)
+                .HasOne(r => r.User)
                 .WithMany(u => u.Reviews)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);

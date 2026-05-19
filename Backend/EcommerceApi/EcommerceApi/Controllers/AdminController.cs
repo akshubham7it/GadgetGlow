@@ -79,6 +79,99 @@ namespace EcommerceApi.Controllers
             });
         }
 
+
+        // GET /api/admin/products/{id}  — fetch single product for edit form
+        [HttpGet("products/{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var p = await _context.Products
+                .Include(p => p.Brand)
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (p == null) return NotFound(new { msg = "Product not found" });
+
+            return Ok(new
+            {
+                product = new
+                {
+                    id = p.Id,
+                    name = p.Name,
+                    description = p.Description,
+                    category = p.Category,
+                    price = p.Price,
+                    discountedPrice = p.DiscountedPrice,
+                    discountPercent = p.DiscountPercent,
+                    quantity = p.Quantity,
+                    colors = p.Colors,
+                    defaultImage = p.DefaultImage,
+                    isActive = p.IsActive,
+                    userId = p.UserId,
+                    brandId = p.BrandId,
+                }
+            });
+        }
+
+        // PATCH /api/admin/products/{id}  — update product from edit form
+        [HttpPatch("products/{id}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProduct(
+            int id,
+            [FromForm] string? name,
+            [FromForm] string? description,
+            [FromForm] string? category,
+            [FromForm] decimal? price,
+            [FromForm] decimal? discountedPrice,
+            [FromForm] int? discountPercent,
+            [FromForm] int? quantity,
+            [FromForm] string? colors,
+            [FromForm] string? imageUrl,
+            IFormFile? image = null)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound(new { msg = "Product not found" });
+
+            if (!string.IsNullOrWhiteSpace(name)) product.Name = name;
+            if (!string.IsNullOrWhiteSpace(description)) product.Description = description;
+            if (!string.IsNullOrWhiteSpace(category)) product.Category = category;
+            if (price.HasValue) product.Price = price.Value;
+            if (discountedPrice.HasValue) product.DiscountedPrice = discountedPrice.Value;
+            if (discountPercent.HasValue) product.DiscountPercent = discountPercent.Value;
+            if (quantity.HasValue) product.Quantity = quantity.Value;
+
+            if (!string.IsNullOrWhiteSpace(colors))
+            {
+                var colorList = colors.Split(',')
+                    .Select(c => c.Trim().ToLower())
+                    .Distinct().Take(2).ToList();
+                product.Colors = string.Join(",", colorList);
+
+                var imgVal = !string.IsNullOrWhiteSpace(imageUrl) ? imageUrl : product.DefaultImage ?? "";
+                var colorImages = new Dictionary<string, string> { ["default"] = imgVal };
+                foreach (var c in colorList) colorImages[c] = imgVal;
+                product.ColorImages = System.Text.Json.JsonSerializer.Serialize(colorImages);
+            }
+
+            if (!string.IsNullOrWhiteSpace(imageUrl))
+            {
+                product.DefaultImage = imageUrl.Trim();
+            }
+            else if (image != null && image.Length > 0)
+            {
+                var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                Directory.CreateDirectory(folder);
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                var path = Path.Combine(folder, fileName);
+                using var stream = new FileStream(path, FileMode.Create);
+                await image.CopyToAsync(stream);
+                product.DefaultImage = $"/uploads/{fileName}";
+            }
+
+            product.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+            return Ok(new { msg = "Product updated successfully" });
+        }
+
         // GET /api/admin/users/{id}  — used by UsersEdit.tsx to prefill form
         [HttpGet("users/{id}")]
         public async Task<IActionResult> GetUser(int id)

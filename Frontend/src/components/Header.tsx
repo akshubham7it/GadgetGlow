@@ -64,10 +64,21 @@ export default function Header() {
         <header className="max-w-[1170px] mx-auto bg-white px-8 py-4 flex items-center justify-center">
 
           {/* Logo */}
-          <div className="flex shrink-0 items-center space-x-3 text-2xl font-bold text-blue-600">
-            <Link to="/"><img className="w-15 h-15 object-contain" src="/logo.svg" alt="Logo" /></Link>
-          </div>
-
+          {/* <div className="flex shrink-0 items-center space-x-3 text-2xl font-bold text-blue-600">
+            <Link to="/"><img className="w-15 h-12 object-contain" src="/logo.jpg.png" alt="Logo" /></Link>
+          </div> */}
+<div className="flex shrink-0 items-center">
+  <Link
+    to="/"
+    className="flex items-center justify-center overflow-hidden"
+  >
+    <img
+      className="h-16 w-auto max-w-none object-contain"
+      src="/logo.png"
+      alt="Logo"
+    />
+  </Link>
+</div>
           {/* Desktop nav */}
           <nav className="hidden sm:flex flex-1 mx-6 items-center space-x-6">
 

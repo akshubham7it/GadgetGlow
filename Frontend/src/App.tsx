@@ -9,6 +9,8 @@ import CreateProduct from "./components/CreateProduct";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
 import ExploreNo from "./ExploreNo";
+import MyOrders from "./Dashboard/Orders";
+import MyUserOrders from "./Dashboard/MyUserOrders";
 
 import Admin from "./Dashboard/Admin";
 import Users from "./Dashboard/Users";
@@ -24,6 +26,7 @@ import UsersEdit from "./Dashboard/UsersEdit";
 import ProductsEdit from "./Dashboard/ProductsEdit";
 import CouponsEdit from "./Dashboard/CouponsEdit";
 
+
 function App() {
   return (
     <Routes>
@@ -38,6 +41,9 @@ function App() {
         <Route path="/cart/explore" element={<Explore />} />
         <Route path="exploreno" element={<ExploreNo />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="/myorders" element={<MyOrders />} />
+        <Route path="/my-orders" element={<MyUserOrders />} />
+
       </Route>
 
       <Route path="/admin" element={<Admin />}>
@@ -47,6 +53,7 @@ function App() {
         <Route path="products" element={<Products />} />
         <Route path="coupons" element={<Coupons />} />
         <Route path="user-create" element={<UsersCreate />} />
+        
         <Route path="brand-create" element={<BrandsCreate />} />
         <Route path="product-create" element={<ProductsCreate />} />
         <Route path="coupon-create" element={<CouponsCreate />} />

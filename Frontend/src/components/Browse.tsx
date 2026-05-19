@@ -47,13 +47,13 @@ export default function Browse() {
   };
 
   const categories = [
-    { name: "Laptop & PC", image: "./mac1.jpg" },
-    { name: "Watches", image: "./watch.jpg" },
-    { name: "Mobile & Tablets", image: "./iphone.jpg" },
-    { name: "Health & Sports", image: "./tm.jpg" },
-    { name: "Home Appliances", image: "./grinder.jpg" },
-    { name: "Games & Videos", image: "./controller.jpg" },
-    { name: "Televisions", image: "./tvgreen.jpg" },
+    { name: "Laptop & PC", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1200&q=80" },
+    { name: "Watches", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" },
+    { name: "Mobile & Tablets", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&q=80" },
+    { name: "Health & Sports", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80" },
+    { name: "Home Appliances", image: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=400&q=80" },
+    { name: "Games & Videos", image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=1200&q=80" },
+    { name: "Televisions", image: "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400&q=80" },
   ];
 
   return (

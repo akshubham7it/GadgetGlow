@@ -1,323 +1,387 @@
-import { useState, useRef, useEffect, type ChangeEvent, type FormEvent } from "react";
+import { useState, useEffect } from "react";
+import { ChevronDown, Link2, Upload, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ChevronDown, ArrowLeft, Plus } from "lucide-react";
-import { z } from "zod";
 import { Toaster, toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 const API_URL = import.meta.env.VITE_APP_USER_API_URL;
 
-const schema = z.object({
-  name: z.string().min(1, "Name is required"),
-  description: z.string().min(1, "Description cannot be empty"),
-  user: z.string().min(1, "User is required"),
-  brand: z.string().min(1, "Brand is required"),
-  price: z.string().min(1, "Price is required"),
-  discountedPrice: z.string().min(1, "Discounted price is required"),
-  quantity: z.string().min(1, "Quantity is required"),
-  color: z.string().min(1, "Color is required"),
-});
+const categories = [
+  "Laptop & PC", "Watches", "Mobile & Tablets", "Health & Sports",
+  "Home Appliances", "Games & Videos", "Televisions",
+];
 
-type FormValues = z.infer<typeof schema>;
+const colors = ["black", "white", "gray", "blue", "orange", "green"];
 
-type User = { id: string; name: string };
-type Brand = { id: string; name: string };
+export default function CreateProduct() {
+  const navigate            = useNavigate();
+  const { isLoggedIn, isAdmin, isSeller, token } = useAuth();
 
-export default function ProductsCreate() {
-  const navigate = useNavigate();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: "",
-    description: "",
-    user: "",
-    brand: "",
-    price: "",
-    discountedPrice: "",
-    quantity: "",
-    color: "",
-  });
-  const [formErrors, setFormErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
-  const [dropdownOpen, setDropdownOpen] = useState<"user" | "brand" |  null>(null);
-
-  const [users, setUsers] = useState<User[]>([]);
-  const [brands, setBrands] = useState<Brand[]>([]);
-
+  // ── Route guard — redirect if not logged in or not admin/seller ───
   useEffect(() => {
-    const fetchDropdowns = async () => {
-      try {
-        const [userRes, brandRes] = await Promise.all([
-          fetch(`${API_URL}/user`),
-          fetch(`${API_URL}/brand`),
-        ]);
-
-        const [userData, brandData] = await Promise.all([
-          userRes.json(),
-          brandRes.json(),
-        ]);
-
-        setUsers(Array.isArray(userData.users) ? userData.users : []);
-        setBrands(Array.isArray(brandData.brands) ? brandData.brands : []);
-      } catch (err) {
-        toast.error("Failed to load dropdown data");
-      }
-    };
-
-    fetchDropdowns();
-  }, []);
-
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (!isLoggedIn) {
+      toast.error("Please sign in to post a product");
+      navigate("/login");
+      return;
     }
+    if (!isAdmin && !isSeller) {
+      toast.error("Only admins and sellers can post products");
+      navigate("/");
+    }
+  }, [isLoggedIn, isAdmin, isSeller]);
+
+  // ── Form state ────────────────────────────────────────────────────
+  const [name,             setName]             = useState("");
+  const [description,      setDescription]      = useState("");
+  const [price,            setPrice]            = useState("");
+  const [discountedPrice,  setDiscountedPrice]  = useState("");
+  const [discountPercent,  setDiscountPercent]  = useState("");
+  const [quantity,         setQuantity]         = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedColor1,   setSelectedColor1]   = useState("black");
+  const [selectedColor2,   setSelectedColor2]   = useState("white");
+  const [catOpen,          setCatOpen]          = useState(false);
+
+  // ── Image section ─────────────────────────────────────────────────
+  // "url" mode = user types an Unsplash/any URL
+  // "upload" mode = user picks a local file (saved to /uploads/)
+  const [imageMode,     setImageMode]     = useState<"url" | "upload">("url");
+  const [imageUrl,      setImageUrl]      = useState("");
+  const [imageFile,     setImageFile]     = useState<File | null>(null);
+  const [imagePreview,  setImagePreview]  = useState<string | null>(null);
+
+  const [loading, setLoading] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.onloadend = () => setImagePreview(reader.result as string);
+    reader.readAsDataURL(file);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+  const clearImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setImageUrl("");
   };
 
-  const handleSelect = (key: "user" | "brand" , value: string) => {
-    setFormValues({ ...formValues, [key]: value });
-    setDropdownOpen(null);
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!name.trim())             return toast.error("Product name is required");
+    if (!price || !discountedPrice) return toast.error("Price fields are required");
+    if (!quantity)                return toast.error("Quantity is required");
+    if (imageMode === "url" && !imageUrl.trim())
+      return toast.error("Please enter an image URL");
+    if (imageMode === "upload" && !imageFile)
+      return toast.error("Please upload an image");
+
+    setLoading(true);
+
     try {
-      schema.parse(formValues);
-      setFormErrors({});
-
+      // Build multipart form data
       const formData = new FormData();
-      formData.append("name", formValues.name);
-      formData.append("description", formValues.description);
-      formData.append("userId", formValues.user);
-      formData.append("brandId", formValues.brand);
-      formData.append("price", formValues.price);
-      formData.append("discountedPrice", formValues.discountedPrice);
-      formData.append("quantity", formValues.quantity);
-      formData.append("color", formValues.color);
+      formData.append("name",            name);
+      formData.append("description",     description);
+      formData.append("category",        selectedCategory);
+      formData.append("price",           price);
+      formData.append("discountedPrice", discountedPrice);
+      formData.append("discountPercent", discountPercent || "0");
+      formData.append("quantity",        quantity);
 
-      const file = fileInputRef.current?.files?.[0];
-      if (file) {
-        formData.append("image", file);
+      // Colors: color1 and color2, stored as "black,white"
+      const colorString = selectedColor2
+        ? `${selectedColor1},${selectedColor2}`
+        : selectedColor1;
+      formData.append("colors", colorString);
+
+      // Image: either URL or file
+      if (imageMode === "url") {
+        formData.append("imageUrl", imageUrl);
+      } else if (imageFile) {
+        formData.append("image", imageFile);
       }
 
-      const token = localStorage.getItem("token");
-
-      const response = await fetch(`${API_URL}/product`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const res = await fetch(`${API_URL}/postproduct`, {
+        method:  "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        // Do NOT set Content-Type — browser sets it with boundary for multipart
         body: formData,
       });
 
-      const result = await response.json();
+      const result = await res.json();
 
-      if (response.ok) {
-        toast.success(result.msg || "Product saved");
-        navigate("/admin/products");
+      if (res.ok) {
+        toast.success("Product posted successfully!");
+        setTimeout(() => navigate("/explore"), 800);
       } else {
-        toast.error(result.msg || "Something went wrong");
+        toast.error(result.msg || "Failed to post product");
       }
-    } catch (err: any) {
-      const errors: Partial<Record<keyof FormValues, string>> = {};
-      err.errors?.forEach((error: any) => {
-        errors[error.path[0] as keyof FormValues] = error.message;
-      });
-      setFormErrors(errors);
+    } catch {
+      toast.error("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
+  // Don't render anything while redirecting
+  if (!isLoggedIn || (!isAdmin && !isSeller)) return null;
+
   return (
-    <div className="p-6 min-h-screen bg-[#f5f5f5]">
+    <>
       <Toaster position="top-center" />
-      <div className="flex justify-between items-center mb-6">
-        <p className="text-[#0a0a0a] text-xl">Create Product</p>
-        <button
-          onClick={() => navigate("/admin/products")}
-          className="flex items-center gap-2 border border-solid py-1 px-3 rounded-lg hover:bg-green-700 hover:text-white"
-        >
-          <ArrowLeft size={18} />
-          Back to Products
-        </button>
+      <div className="px-4 py-8">
+        <div className="max-w-[1170px] mx-auto">
+          <div className="text-center text-black font-bold text-2xl">Sell your Product</div>
+          <div className="text-center text-base pt-1.5">
+            <span className="text-black">You are posting this product for</span>
+            <span className="text-yellow-500 font-bold ml-1">✨ Free ✨</span>
+          </div>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md max-w-screen">
-        <div className="flex flex-col ml-4 gap-6">
-          <div className="flex flex-col gap-2 w-96">
-            <label>Product Image</label>
-            <div
-              className="w-28 h-24 bg-[#f6eded] border border-gray-400 flex items-center justify-center cursor-pointer overflow-hidden rounded-md"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              {avatarPreview ? (
-                <img src={avatarPreview} alt="Preview" className="w-full h-full object-cover" />
-              ) : (
-                <Plus size={36} className="text-gray-400" />
+      <form onSubmit={handleSubmit}>
+        <div className="w-full px-4 pb-12">
+          <div className="max-w-[1170px] mx-auto flex flex-col md:flex-row gap-6 min-h-[80vh]">
+
+            {/* ── LEFT: Image Section ─────────────────────────────── */}
+            <div className="md:w-1/2 w-full bg-green-100 p-6 rounded-xl border border-gray-200">
+              <div className="text-[#1C274C] font-semibold text-lg mb-4">Add Image</div>
+
+              {/* Toggle between URL and Upload */}
+              <div className="flex gap-2 mb-4">
+                <button
+                  type="button"
+                  onClick={() => { setImageMode("url"); clearImage(); }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                    imageMode === "url"
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                  }`}
+                >
+                  <Link2 size={16} />
+                  Image URL
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setImageMode("upload"); clearImage(); }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                    imageMode === "upload"
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                  }`}
+                >
+                  <Upload size={16} />
+                  Upload File
+                </button>
+              </div>
+
+              {/* URL mode */}
+              {imageMode === "url" && (
+                <div>
+                  <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={(e) => { setImageUrl(e.target.value); setImagePreview(e.target.value); }}
+                    placeholder="https://images.unsplash.com/photo-..."
+                    className="w-full rounded-lg px-4 py-2 border border-gray-300 text-sm mb-3"
+                  />
+                  <div className="w-full h-48 border-2 border-dashed border-gray-300 rounded-xl bg-white flex items-center justify-center overflow-hidden">
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt="Preview"
+                        className="w-full h-full object-contain p-2"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                      />
+                    ) : (
+                      <div className="text-center text-gray-400 text-sm">
+                        <Link2 size={32} className="mx-auto mb-2 opacity-40" />
+                        <p>Paste an image URL above</p>
+                        <p className="text-xs mt-1">Unsplash, Imgur, etc.</p>
+                      </div>
+                    )}
+                  </div>
+                  {imageUrl && (
+                    <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
+                      ✓ Image URL will be saved to database
+                    </p>
+                  )}
+                </div>
               )}
+
+              {/* Upload mode */}
+              {imageMode === "upload" && (
+                <div>
+                  <div className="relative w-full h-64 border-2 border-dashed border-gray-400 rounded-xl bg-white flex items-center justify-center cursor-pointer overflow-hidden">
+                    <input
+                      type="file" accept="image/*"
+                      onChange={handleFileChange}
+                      className="absolute w-full h-full opacity-0 cursor-pointer"
+                    />
+                    {imagePreview ? (
+                      <img src={imagePreview} alt="Preview" className="w-full h-full object-contain p-2" />
+                    ) : (
+                      <div className="text-center text-gray-400">
+                        <img src="./upload.svg" alt="Upload" className="w-16 h-16 mx-auto mb-2 opacity-60" />
+                        <p className="text-sm">Click or drag to upload</p>
+                      </div>
+                    )}
+                  </div>
+                  {imageFile && (
+                    <div className="flex items-center justify-between mt-2">
+                      <p className="text-xs text-green-600">✓ {imageFile.name}</p>
+                      <button type="button" onClick={clearImage} className="text-red-500 hover:text-red-700">
+                        <X size={16} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Color pickers */}
+              <div className="mt-6">
+                <p className="text-[#1C274C] font-semibold mb-3">Product Colors (2 max)</p>
+                <div className="flex gap-6">
+                  <div>
+                    <label className="text-sm text-gray-600 mb-1 block">Color 1</label>
+                    <select
+                      value={selectedColor1}
+                      onChange={(e) => setSelectedColor1(e.target.value)}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white"
+                    >
+                      {colors.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-600 mb-1 block">Color 2 (optional)</label>
+                    <select
+                      value={selectedColor2}
+                      onChange={(e) => setSelectedColor2(e.target.value)}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm bg-white"
+                    >
+                      <option value="">None</option>
+                      {colors.filter((c) => c !== selectedColor1).map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              onChange={handleFileUpload}
-              className="hidden"
-            />
+
+            {/* ── RIGHT: Product Info ─────────────────────────────── */}
+            <div className="md:w-1/2 w-full bg-green-100 p-6 rounded-xl shadow-sm">
+
+              <div className="text-gray-800 text-lg mb-2">Product Name *</div>
+              <input
+                type="text" value={name} onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-xl px-5 py-2 mb-5 border border-gray-300 text-base"
+                placeholder="Product Title"
+              />
+
+              {/* Category dropdown */}
+              <div className="text-gray-800 text-lg mb-2">Category *</div>
+              <div className="relative mb-5">
+                <button
+                  type="button"
+                  onClick={() => setCatOpen(!catOpen)}
+                  className="w-full flex items-center justify-between px-5 py-2 rounded-xl bg-white border border-gray-300 text-base font-semibold text-gray-800"
+                >
+                  <p>{selectedCategory}</p>
+                  <ChevronDown size={18} />
+                </button>
+                {catOpen && (
+                  <div className="absolute top-full left-0 w-full bg-white rounded-lg border mt-1 z-10 shadow-md">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat} type="button"
+                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-red-100 hover:text-black text-sm"
+                        onClick={() => { setSelectedCategory(cat); setCatOpen(false); }}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Price fields */}
+              <div className="flex flex-col md:flex-row gap-4 mb-5">
+                <div className="flex-1">
+                  <label className="block text-gray-800 text-sm mb-1">Discounted Price * ($)</label>
+                  <input
+                    type="number" value={discountedPrice}
+                    onChange={(e) => setDiscountedPrice(e.target.value)}
+                    className="w-full rounded-lg px-4 py-2 border border-gray-300"
+                    placeholder="e.g. 450"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-gray-800 text-sm mb-1">Original Price * ($)</label>
+                  <input
+                    type="number" value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    className="w-full rounded-lg px-4 py-2 border border-gray-300"
+                    placeholder="e.g. 500"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-4 mb-5">
+                <div className="flex-1">
+                  <label className="block text-gray-800 text-sm mb-1">Discount %</label>
+                  <input
+                    type="number" value={discountPercent}
+                    onChange={(e) => setDiscountPercent(e.target.value)}
+                    className="w-full rounded-lg px-4 py-2 border border-gray-300"
+                    placeholder="e.g. 10"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-gray-800 text-sm mb-1">Quantity *</label>
+                  <input
+                    type="number" value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    className="w-full rounded-lg px-4 py-2 border border-gray-300"
+                    placeholder="e.g. 50"
+                  />
+                </div>
+              </div>
+
+              <div className="mb-5">
+                <label className="block text-gray-800 text-lg mb-2">Description</label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="w-full rounded-lg px-4 py-3 border border-gray-300 min-h-[100px]"
+                  placeholder="Write your product description here..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-indigo-900 text-white rounded-xl px-5 py-3 text-lg disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+                    </svg>
+                    Posting...
+                  </>
+                ) : "Post Product"}
+              </button>
+            </div>
           </div>
-
-          <div className="flex flex-col gap-2">
-            <label>Name *</label>
-            <input
-              type="text"
-              name="name"
-              value={formValues.name}
-              onChange={handleChange}
-              className="w-96 rounded-md border px-3 py-2"
-              placeholder="Product Name"
-            />
-            {formErrors.name && <p className="text-red-500 text-sm">{formErrors.name}</p>}
-          </div>
-
-          <div className="flex flex-col gap-2 relative">
-            <label>User *</label>
-            <button
-              type="button"
-              onClick={() => setDropdownOpen(dropdownOpen === "user" ? null : "user")}
-              className="w-96 flex justify-between items-center border rounded-md px-3 py-2"
-            >
-              {users.find(u => u.id === formValues.user)?.name || "Select User"}
-              <ChevronDown size={18} />
-            </button>
-            {dropdownOpen === "user" && (
-              <ul className="absolute top-20 z-10 w-96 border bg-white rounded-md shadow-md max-h-40 overflow-auto">
-                {users.map((u) => (
-                  <li
-                    key={u.id}
-                    onClick={() => handleSelect("user", u.id)}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  >
-                    {u.name}
-                  </li>
-                ))}
-              </ul>
-            )}
-            {formErrors.user && <p className="text-red-500 text-sm">{formErrors.user}</p>}
-          </div>
-
-          <div className="flex flex-col gap-2 relative">
-            <label>Brand *</label>
-            <button
-              type="button"
-              onClick={() => setDropdownOpen(dropdownOpen === "brand" ? null : "brand")}
-              className="w-96 flex justify-between items-center border rounded-md px-3 py-2"
-            >
-              {brands.find(b => b.id === formValues.brand)?.name || "Select Brand"}
-              <ChevronDown size={18} />
-            </button>
-            {dropdownOpen === "brand" && (
-              <ul className="absolute top-20 z-10 w-96 border bg-white rounded-md shadow-md max-h-40 overflow-auto">
-                {brands.map((b) => (
-                  <li
-                    key={b.id}
-                    onClick={() => handleSelect("brand", b.id)}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  >
-                    {b.name}
-                  </li>
-                ))}
-              </ul>
-            )}
-            {formErrors.brand && <p className="text-red-500 text-sm">{formErrors.brand}</p>}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label>Description *</label>
-            <textarea
-              name="description"
-              value={formValues.description}
-              onChange={handleChange}
-              className="w-96 h-28 rounded-md border px-3 py-2 min-h-20"
-              placeholder="Product Description"
-            />
-            {formErrors.description && (
-              <p className="text-red-500 text-sm">{formErrors.description}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label>Price *</label>
-            <input
-              type="number"
-              name="price" 
-              value={formValues.price}
-              onChange={handleChange}
-              className="w-96 rounded-md border px-3 py-2"
-              placeholder="Enter product price"
-            />
-            {formErrors.price && <p className="text-red-500 text-sm">{formErrors.price}</p>}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label>Discounted Price *</label>
-            <input
-              type="number"
-              name="discountedPrice"
-              value={formValues.discountedPrice}
-              onChange={handleChange}
-              className="w-96 rounded-md border px-3 py-2"
-              placeholder="Enter discounted price"
-            />
-            {formErrors.discountedPrice && (
-              <p className="text-red-500 text-sm">{formErrors.discountedPrice}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label>Quantity *</label>
-            <input
-              type="number"
-              name="quantity"
-              value={formValues.quantity}
-              onChange={handleChange}
-              className="w-96 rounded-md border px-3 py-2"
-              placeholder="Enter quantity"
-            />
-            {formErrors.quantity && (
-              <p className="text-red-500 text-sm">{formErrors.quantity}</p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label>Color *</label>
-            <input
-              type="text"
-              name="color"
-              value={formValues.color}
-              onChange={handleChange}
-              className="w-96 rounded-md border px-3 py-2"
-              placeholder="Enter color"
-            />
-            {formErrors.color && (
-              <p className="text-red-500 text-sm">{formErrors.color}</p>
-            )}
-          </div>
-
-          
-
-          <button
-            type="submit"
-            className="w-96 text-white bg-[#076A41] py-2 rounded-md hover:bg-green-700"
-          >
-            Save
-          </button>
         </div>
       </form>
-    </div>
+    </>
   );
 }

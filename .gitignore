@@ -1,4 +1,23 @@
-node_modules/
+# Backend (.NET / Visual Studio)
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Sensitive config
+Backend/EcommerceApi/appsettings.Development.json
+
+# Frontend
+Frontend/node_modules/
+Frontend/dist/
+Frontend/build/
+
+# Environment variables
 .env
-dist/
-build/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/

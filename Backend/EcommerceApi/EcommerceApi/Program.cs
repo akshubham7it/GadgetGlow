@@ -58,7 +58,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
-
+builder.Services.AddScoped<EcommerceApi.Services.EmailService>();
 var app = builder.Build();
 
 app.UseStaticFiles();

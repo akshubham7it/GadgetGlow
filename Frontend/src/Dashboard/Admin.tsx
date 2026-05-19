@@ -16,9 +16,9 @@ export default function Admin() {
 
   const navItems = [
     { label: "Users", to: "/admin/users", icon: <UserRound size={18} /> },
-    { label: "Brands", to: "/admin/brands", icon: <BadgeCheck size={18} /> },
+    // { label: "Brands", to: "/admin/brands", icon: <BadgeCheck size={18} /> },
     { label: "Products", to: "/admin/products", icon: <Package size={18} /> },
-    { label: "Coupons", to: "/admin/coupons", icon: <PercentCircle size={18} /> },
+    // { label: "Coupons", to: "/admin/coupons", icon: <PercentCircle size={18} /> },
   ];
 
   const handleNavigate = (path: string) => {

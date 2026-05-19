@@ -7,69 +7,86 @@ export default function Timer() {
   useEffect(() => {
     if (time <= 0) return;
 
-    const timer = setTimeout(() => {
-      setTime(time - 1000);
+    const timer = setInterval(() => {
+      setTime((prev) => prev - 1000);
     }, 1000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(timer);
   }, [time]);
 
   const getTimeParts = (milliseconds: number) => {
     const totalSeconds = Math.floor(milliseconds / 1000);
     const totalMinutes = Math.floor(totalSeconds / 60);
     const totalHours = Math.floor(totalMinutes / 60);
+
     const days = Math.floor(totalHours / 24);
-    const seconds = totalSeconds % 60;
-    const minutes = totalMinutes % 60;
     const hours = totalHours % 24;
+    const minutes = totalMinutes % 60;
+    const seconds = totalSeconds % 60;
+
     return [days, hours, minutes, seconds];
   };
 
   const [days, hours, minutes, seconds] = getTimeParts(time);
 
   return (
-    <>
-      <div className="max-w-[1170px] mx-auto lg:px-4 sm:px-8  ">
-        <div className="mt-5 w-full bg-[#D0E9F3] h-auto sm:h- lg:h-[580px] xl:h-[520px] rounded-2xl md:p-4 sm:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 h-full gap-6">
-            <div className="lg:col-span-7 flex items-center justify-center sm:justify-center lg:justify-end pr-0 sm:pr-0 lg:pr-[130px] order-1 lg:order-2">
-              <img className="max-w-full h-auto" src="./blahp.jpg" alt="" />
+    <div className="max-w-[1170px] mx-auto px-4 py-10">
+      <div className="bg-[#D8EEF7] rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-10 p-8 md:p-12">
+          
+          {/* LEFT CONTENT */}
+          <div className="flex flex-col justify-center">
+            <p className="text-[#4B5CFF] text-lg font-medium mb-4">
+              Don't Miss!!
+            </p>
+
+            <h1 className="text-[#162044] text-4xl md:text-5xl font-bold leading-tight mb-5">
+              Enhance Your Music Experience
+            </h1>
+
+            <p className="text-[#5B647C] text-base mb-8">
+              True Wireless Noise Cancelling Headphone
+            </p>
+
+            {/* TIMER */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {[
+                { label: "Days", value: days },
+                { label: "Hours", value: hours },
+                { label: "Minutes", value: minutes },
+                { label: "Seconds", value: seconds },
+              ].map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className="w-[72px] h-[72px] bg-white rounded-xl shadow-md flex items-center justify-center text-[#162044] text-3xl font-bold">
+                    {String(item.value).padStart(2, "0")}
+                  </div>
+
+                  <p className="mt-2 text-sm text-[#162044]">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
             </div>
 
-            <div className="lg:col-span-5 flex flex-col gap-4 sm:pl-4 lg:pl-[60px] justify-start pt-[20px] sm:pt-[30px] lg:pt-[40px] order-2 lg:order-1">
-              <p className="text-[#3C50E0] text-[20px] sm:text-[22px]">
-                Don't Miss!!
-              </p>
-              <p className="text-[#1C274C] text-[26px] sm:text-[30px] lg:text-[40px] font-bold ">
-                Enhance Your Music Experience
-              </p>
-              <p className="text-[#606882] text-sm sm:text-base">
-                True Wireless Noise Cancelling Headphone
-              </p>
+            {/* BUTTON */}
+            <button className="w-fit px-7 py-3 rounded-xl bg-[#3C50E0] text-white font-medium hover:bg-[#2436b8] transition-all duration-300">
+              Check it Out!
+            </button>
+          </div>
 
-              <div className="mt-3 flex flex-wrap gap-5 text-[#1C274C]">
-                {[
-                  { label: "Days", value: days },
-                  { label: "Hours", value: hours },
-                  { label: "Minutes", value: minutes },
-                  { label: "Seconds", value: seconds },
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col gap-1.5 items-center">
-                    <div className="w-[55px] sm:w-[60px] h-[55px] sm:h-[60px] font-semibold text-2xl sm:text-3xl text-dark rounded-lg flex items-center justify-center bg-white shadow-md px-3 sm:px-4 mb-2">
-                      {String(item.value).padStart(2, "0")}
-                    </div>
-                    <p className="text-[13px] sm:text-[14px]">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <button className="mt-4 py-1.5 px-1.5 w-28 h-10 sm:w-32 hover:bg-blue-950 rounded-lg bg-[#3C50E0] text-white mb-">
-                Check it Out!
-              </button>
+          {/* RIGHT IMAGE */}
+          <div className="flex justify-center items-center">
+            <div className="w-full max-w-[520px] h-[320px] md:h-[380px] overflow-hidden rounded-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=80"
+                alt="Headphones"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
+
         </div>
       </div>
-    </>
+    </div>
   );
 }
